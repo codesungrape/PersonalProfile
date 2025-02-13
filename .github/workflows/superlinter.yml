@@ -1,0 +1,48 @@
+# Trigger section 
+name: Super-Linter
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# The Job Setup
+jobs:
+  super-lint:
+    name: Lint code base
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+    # Downloading code so the linter can check it
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # The Main Linting Action
+      - name: Run Super-Linter
+        uses: github/super-linter/slim@v5
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # The specific rules
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_TYPESCRIPT_ES: true
+          VALIDATE_CSS: true
+          VALIDATE_YAML: true
+          VALIDATE_REACT: true
+          VALIDATE_JSX: true
+          VALIDATE_JEST: true
+          VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_MARKDOWN: false
+
+
+
+
+
+
+          
