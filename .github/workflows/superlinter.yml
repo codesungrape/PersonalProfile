@@ -30,6 +30,7 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # The specific rules
+          # Only specify the linters you want to run
           VALIDATE_JAVASCRIPT_ES: true
           VALIDATE_TYPESCRIPT_ES: true
           VALIDATE_CSS: true
@@ -37,8 +38,6 @@ jobs:
           VALIDATE_REACT: true
           VALIDATE_JSX: true
           VALIDATE_JEST: true
-          VALIDATE_NATURAL_LANGUAGE: false
-          VALIDATE_MARKDOWN: false
 
 
 
