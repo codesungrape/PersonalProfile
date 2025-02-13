@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on: 
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy Application
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get our code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Step 3: Install project dependencies 
+      - name: Install Dependencies
+        run: npm ci
+
+      # Step 4: Build the application
+      - name: Build
+        run: npm run build
+        env:
+          # Add any environment variables needed for build
+          REACT_APP_API_URL: ${{ secrets.API_URL }}
+
+      # Step 5: Deploy to Vercel (using Vercel Action)
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+          vercel-args: '--prod' # Add this to deploy to production
