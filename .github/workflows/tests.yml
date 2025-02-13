@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main " ]
+
+jobs:
+  test: 
+    name: Run Tests
+    runs-on: ubuntu-latest # Use Ubuntu as the operating system 
+    # You can add strategy to test multiple Node versions
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]  # Test on both Node 18 and 20
+
+    steps:
+    # Step 1: Get the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+    # Step 2: Set up Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm' # Caches npm dependencies
+
+    # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm ci  # Clean install of dependencies
+
+    # Step 4: Run tests
+      - name: Run Tests
+        run: npm test
+        env:
+          CI: true  # Ensures CI-specific behavior
+
+    # Optional: Upload test coverage
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+        if: always()  # Upload even if tests fail
+
+          
