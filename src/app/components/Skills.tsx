@@ -57,6 +57,9 @@ export default function Skills() {
                     className="bg-matrix-darkGreen text-matrix-lightGreen px-3 py-1 rounded-full text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
                   >
                     {skill}
                   </motion.span>

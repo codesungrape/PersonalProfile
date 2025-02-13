@@ -13,7 +13,7 @@ export default function Contact() {
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-matrix-lightGreen font-mono">Establish Connection</h2>
         <p className="text-lg text-matrix-green mb-8">
-          Ready to collaborate on groundbreaking projects or discuss the future of technology? Don't hesitate to reach
+          Ready to collaborate on groundbreaking projects or discuss the future of technology? Don&apos;t hesitate to reach
           out through the digital ether.
         </p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -57,7 +57,6 @@ export default function Contact() {
           </a>
         </div>
         <div className="mt-8 text-matrix-green">
-          <p>Phone: 07341544877</p>
           <p>Location: Birmingham, United Kingdom</p>
         </div>
       </motion.div>
